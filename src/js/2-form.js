@@ -12,6 +12,7 @@ form.addEventListener('submit', (event) => {
     if (formData.email.trim() === '' || formData.message.trim() === '') {
         alert('Fill please all fields');
     } else {
+        console.log(formData);
         localStorage.removeItem('feedback-form-state');
         formData.email = '';
         formData.message = '';
@@ -21,6 +22,8 @@ form.addEventListener('submit', (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('feedback-form-state') !== null) {
+        formData.email = JSON.parse(localStorage.getItem('feedback-form-state')).email;
+        formData.message = JSON.parse(localStorage.getItem('feedback-form-state')).message;
         form.querySelector('input[name="email"]').value = JSON.parse(localStorage.getItem('feedback-form-state')).email;
         form.querySelector('textarea[name="message"]').value = formData.message = JSON.parse(localStorage.getItem('feedback-form-state')).message;
     }
